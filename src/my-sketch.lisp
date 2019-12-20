@@ -1,15 +1,12 @@
 (defpackage my-sketch
-    (:use :cl :my-sketch.math)
-    (:import-from :kit.sdl2
-        :gl-window)
-    (:import-from :alexandria
-        :make-keyword
-        :symbolicate)
+    (:use :cl)
+    (:import-from :my-sketch.math
+        :+pi+)
     (:export :hello))
 (in-package :my-sketch)
 
 (defun hello (x)
-    (+ 2 x))
+    (+ x +pi+))
 
 ;; (defstruct env
 ;;     (pen nil))

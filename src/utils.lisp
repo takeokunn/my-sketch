@@ -1,8 +1,5 @@
 (defpackage my-sketch.utils
     (:use :cl :my-sketch.math)
-    (:import-from :alexandria
-        :make-keyword
-        :lerp)
     (:export :pad-list
         :split-n
         :group
@@ -13,7 +10,8 @@
         :lerp-lists
         :flatten
         :coerce-float
-        :relative-path))
+        :relative-path
+        :file-name-extension))
 (in-package :my-sketch.utils)
 
 (defun pad-list (list pad length)
@@ -88,3 +86,8 @@
 
 (defun relative-path (path &optional (system 'my-sketch))
     (format nil "~a" (asdf:system-relative-pathname system path)))
+
+(defun file-name-extension (name)
+    (let ((pos (position #\. name :from-end t)))
+        (when (numberp pos)
+            (subseq name (1+ pos)))))

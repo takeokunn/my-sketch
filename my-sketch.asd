@@ -16,6 +16,8 @@
                      :components
                      ((:file "my-sketch" :depends-on ("math"))
                          (:file "math")
-                         (:file "utils"))))
+                         (:file "utils")
+                         (:file "env")
+                         (:file "resources"))))
     :description ""
     :in-order-to ((test-op (test-op "my-sketch-test"))))

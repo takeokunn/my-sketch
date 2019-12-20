@@ -1,10 +1,16 @@
 (defpackage my-sketch.math
     (:use :cl)
-    (:import-from :kit.sdl2
-        :gl-window)
-    (:import-from :alexandria
-        :clamp)
-    (:export :clamp-1
+    (:export
+        :+pi+
+        :+two-pi+
+        :+tau+
+        :+half-pi+
+        :+quarter-pi+
+        :+epsilon+
+        :+phi+
+        :+golden-ratio+
+        :+e+
+        :clamp-1
         :radians
         :degrees))
 (in-package :my-sketch.math)
@@ -12,7 +18,7 @@
 (defconstant +pi+ PI)
 (defconstant +two-pi+ (* PI 2))
 (defconstant +tau+ +two-pi+)
-(defconstant +half-pi+(/ PI 2))
+(defconstant +half-pi+ (/ PI 2))
 (defconstant +quarter-pi+ (/ PI 4))
 (defconstant +epsilon+ single-float-epsilon)
 (defconstant +phi+ 1.61803398875)

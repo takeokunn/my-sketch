@@ -34,7 +34,7 @@
 ;;         utils           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(plan 23)
+(plan 25)
 
 ;; pad-list
 (is (my-sketch.utils:pad-list '(4 5) 1 5) '(1 1 1 4 5))
@@ -80,5 +80,9 @@
 
 ;; relative-path
 (is (my-sketch.utils:relative-path "test.txt") (format nil "~Atest.txt" (asdf:system-source-directory 'my-sketch)))
+
+;; file-name-extension
+(is (my-sketch.utils:file-name-extension "aaa") nil)
+(is (my-sketch.utils:file-name-extension "aaa.txt") "txt")
 
 (finalize)
