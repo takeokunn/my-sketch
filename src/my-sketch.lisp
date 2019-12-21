@@ -1,12 +1,12 @@
 (defpackage my-sketch
-    (:use :cl)
-    (:import-from :my-sketch.math
-        :+pi+)
-    (:export :hello))
+  (:use :cl)
+  (:import-from :my-sketch.math
+    :+pi+)
+  (:export :hello))
 (in-package :my-sketch)
 
 (defun hello (x)
-    (+ x +pi+))
+  (+ x +pi+))
 
 ;; (defstruct env
 ;;     (pen nil))

@@ -26,13 +26,13 @@
 (defconstant +e+ (exp 1))
 
 (defmacro clamp-1 (x)
-    `(alexandria:clamp ,x 0.0 1.0))
+  `(alexandria:clamp ,x 0.0 1.0))
 
 ;; TODO
 (defun normalize ())
 
 (defmacro radians (deg)
-    `(* PI (/ ,deg 180)))
+  `(* PI (/ ,deg 180)))
 
 (defmacro degrees (rad)
-    `(* 180 (/ ,rad PI)))
+  `(* 180 (/ ,rad PI)))
