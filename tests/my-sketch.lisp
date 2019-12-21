@@ -1,12 +1,12 @@
 (defpackage my-sketch-test
-    (:use :cl :prove)
-    (:import-from :my-sketch.math
-        :clamp-1
-        :radians
-        :degrees)
-    (:import-from :my-sketch.utils
-        :pad-list
-        :split-n))
+  (:use :cl :prove)
+  (:import-from :my-sketch.math
+                :clamp-1
+                :radians
+                :degrees)
+  (:import-from :my-sketch.utils
+                :pad-list
+                :split-n))
 (in-package :my-sketch-test)
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :my-sketch)' in your Lisp.
