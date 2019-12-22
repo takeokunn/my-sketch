@@ -18,6 +18,8 @@
                            (:file "math")
                            (:file "utils")
                            (:file "env")
-                           (:file "resources" :depends-on ("utils" "env")))))
+                           (:file "resources" :depends-on ("utils" "env"))
+                           ;; (:file "color")
+                           )))
     :description ""
     :in-order-to ((test-op (test-op "my-sketch-test"))))

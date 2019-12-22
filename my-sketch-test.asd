@@ -16,6 +16,8 @@
                  :static-vectors)
     :components ((:module "tests"
                           :components
-                          ((:test-file "my-sketch"))))
+                          ((:test-file "my-sketch")
+                           (:test-file "utils")
+                           (:test-file "math"))))
     :description "Test system for my-sketch"
     :perform (test-op (op c) (symbol-call :prove-asdf :run-test-system c)))

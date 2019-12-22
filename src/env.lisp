@@ -1,13 +1,13 @@
 (defpackage my-sketch.env
   (:use :cl)
   (:export :*env*
-    :env
-    :make-white-pixel-texture
-    :initialize-environment
-    :initialize-gl
-    :debug-mode-p
-    :exit-debug-mode
-    :with-environment))
+           :env
+           :make-white-pixel-texture
+           :initialize-environment
+           :initialize-gl
+           :debug-mode-p
+           :exit-debug-mode
+           :with-environment))
 (in-package :my-sketch.env)
 
 (defstruct env
