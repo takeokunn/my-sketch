@@ -1,8 +1,5 @@
 (defpackage my-sketch-test.utils
-  (:use :cl :prove)
-  (:import-from :my-sketch.utils
-                :pad-list
-                :split-n))
+  (:use :cl :prove))
 (in-package :my-sketch-test.utils)
 
 (plan 25)
@@ -19,6 +16,12 @@
 (is (my-sketch.utils:group '(1 2 3 4 5) 3) '((1 2 3)))
 (is (my-sketch.utils:group '(1 2 3 4 5 6) 2) '((1 2) (3 4) (5 6)))
 (is (my-sketch.utils:group '(1 2 3 4 5 6) 3) '((1 2 3) (4 5 6)))
+
+;; group-bits
+(is (my-sketch.utils:group-bits 1) '(1))
+(is (my-sketch.utils:group-bits 256) '(1 0))
+(is (my-sketch.utils:group-bits 1000) '(3 232))
+(is (my-sketch.utils:group-bits 65536) '(1 0 0))
 
 ;; order-list
 (is (my-sketch.utils:order-list '(0) '("a" "b" "c")) '("a"))
@@ -48,6 +51,8 @@
 ;; coerce-float
 (is (my-sketch.utils:coerce-float 10) 10.0)
 (is (my-sketch.utils:coerce-float -10) -10.0)
+
+;; TODO: copy-buffer
 
 ;; relative-path
 (is (my-sketch.utils:relative-path "test.txt") (format nil "~Atest.txt" (asdf:system-source-directory 'my-sketch)))

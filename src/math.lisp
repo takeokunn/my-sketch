@@ -11,6 +11,7 @@
    :+golden-ratio+
    :+e+
    :clamp-1
+   :normalize
    :radians
    :degrees))
 (in-package :my-sketch.math)
@@ -28,8 +29,16 @@
 (defmacro clamp-1 (x)
   `(alexandria:clamp ,x 0.0 1.0))
 
-;; TODO
-(defun normalize ())
+(defun normalize (x low high &key (clamp t) (out-low 0.0) (out-high 1.0))
+  (let* ((input-low (min low high))
+         (input-high (max low high))
+         (min-out-low (min out-low out-high))
+         (min-out-high (max out-low out-high))
+         (norm (+ out-low
+                  (* (- out-high out-low)
+                     (/ (- x input-low) (- input-high input-low))))))
+    (cond (clamp (alexandria:clamp norm min-out-low min-out-high))
+          (t norm))))
 
 (defmacro radians (deg)
   `(* PI (/ ,deg 180)))

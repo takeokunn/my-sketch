@@ -3,6 +3,7 @@
   (:export :pad-list
            :split-n
            :group
+           :group-bits
            :order-list
            :mix-lists
            :div2-inexact
@@ -10,6 +11,7 @@
            :lerp-lists
            :flatten
            :coerce-float
+           :copy-buffer
            :relative-path
            :file-name-extension))
 (in-package :my-sketch.utils)
@@ -37,8 +39,12 @@
           (setf list (cdr split)))
      finally (return (nreverse acc))))
 
-;; TODO
-(defun group-bits ())
+(defun group-bits (x &optional (bits 8))
+  (let ((bit-fill (1- (expt 2 bits))))
+    (do* ((x x (ash x (- bits)))
+          (acc `(,(boole boole-and x bit-fill))
+               (cons (boole boole-and x bit-fill) acc)))
+         ((zerop x) (cdr acc)))))
 
 (defun order-list (order list)
   (loop for o in order
@@ -77,8 +83,10 @@
 (defun coerce-float (x)
   (coerce x 'single-float))
 
-;; TODO
-(defun copy-buffer ())
+(defun copy-buffer (src dst length &key (src-offset 0) (dst-offset 0))
+  (loop for i from 0 below length
+     do (setf (cffi:mem-aref dst :uint8 (+ i src-offset))
+              (cffi:mem-aref src :uint8 (+ i dst-offset)))))
 
 (defun relative-path (path &optional (system 'my-sketch))
   (format nil "~a" (asdf:system-relative-pathname system path)))
