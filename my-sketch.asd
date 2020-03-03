@@ -17,9 +17,8 @@
                         ((:file "my-sketch")
                          (:file "math")
                          (:file "utils")
-                         (:file "env")
-                         ;; (:file "resources" :depends-on ("utils" "env"))
-                         ;; (:file "color")
+                         ;; (:file "color" :depends-on ("math"))
+                         ;; (:file "pen" :depends-on ("color"))
                          )))
   :description ""
   :in-order-to ((test-op (test-op "my-sketch-test"))))

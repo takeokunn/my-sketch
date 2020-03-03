@@ -52,8 +52,8 @@
      (env-vao env) (make-instance 'kit.gl.vao:vao :type 'sketch-vao)
      (env-white-pixel-texture env) (make-white-pixel-texture)
      (env-white-color-vector env) #(255 255 255 255)
-     (env-pen env) (make-default-pen)
-     (env-font env) (make-default-font))
+     ;; (env-pen env) (make-default-pen)
+     ;; (env-font env) (make-default-font))
     (kit.gl.shader:use-program (env-programs env) :fill-shader)
     (kit.gl.shader:uniform-matrix
      (env-programs env) :view-m 4 (vector (env-view-matrix env)))))

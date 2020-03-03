@@ -17,7 +17,8 @@
   :components ((:module "tests"
                         :components
                         ((:test-file "my-sketch")
+                         (:test-file "math")
                          (:test-file "utils")
-                         (:test-file "math"))))
+                         (:test-file "color"))))
   :description "Test system for my-sketch"
   :perform (test-op (op c) (symbol-call :prove-asdf :run-test-system c)))

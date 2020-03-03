@@ -26,8 +26,8 @@
 (defconstant +golden-ratio+ +phi+)
 (defconstant +e+ (exp 1))
 
-(defmacro clamp-1 (x)
-  `(alexandria:clamp ,x 0.0 1.0))
+(defun clamp-1 (x)
+  (alexandria:clamp x 0.0 1.0))
 
 (defun normalize (x low high &key (clamp t) (out-low 0.0) (out-high 1.0))
   (let* ((input-low (min low high))
