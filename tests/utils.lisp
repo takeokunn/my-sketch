@@ -6,6 +6,7 @@
 
 ;; pad-list
 (is (pad-list '(4 5) 1 5) '(1 1 1 4 5))
+(is (pad-list '(2 3 4 5) 1 3) '(2 3 4 5))
 
 ;; split-n
 (is (split-n '(1 2 3 4 5) 1) '((1) 2 3 4 5))

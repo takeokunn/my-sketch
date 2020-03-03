@@ -7,6 +7,7 @@
            :color-hue
            :color-saturation
            :color-brightness
+           :color-alpha
            :rgb-to-hsb
            :hsb-to-rgb
            :rgb

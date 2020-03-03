@@ -17,7 +17,7 @@
                         ((:file "my-sketch")
                          (:file "math")
                          (:file "utils")
-                         ;; (:file "color" :depends-on ("math"))
+                         (:file "color" :depends-on ("math" "utils"))
                          ;; (:file "pen" :depends-on ("color"))
                          )))
   :description ""
