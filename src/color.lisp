@@ -1,5 +1,12 @@
 (defpackage my-sketch.color
   (:use :cl)
+  (:import-from :my-sketch.math
+                :clamp-1
+                :normalize)
+  (:import-from :my-sketch.utils
+                :group-bits
+                :coerce-float
+                :pad-list)
   (:export :color
            :color-red
            :color-green
@@ -77,7 +84,7 @@
 
 (defun rgb (red green blue &optional (alpha 1.0))
   (destructuring-bind (red green blue alpha)
-      (mapcar #'my-sketch.math:clamp-1 (list red green blue alpha))
+      (mapcar #'clamp-1 (list red green blue alpha))
     (let ((hsb (rgb-to-hsb red green blue)))
       (make-instance 'color
                      :red red :green green :blue blue :alpha alpha
@@ -85,7 +92,7 @@
 
 (defun hsb (hue saturation brightness &optional (alpha 1.0))
   (destructuring-bind (hue saturation brightness alpha)
-      (mapcar #'my-sketch.math:clamp-1 (list hue saturation brightness alpha))
+      (mapcar #'clamp-1 (list hue saturation brightness alpha))
     (let ((rgb (hsb-to-rgb hue saturation brightness)))
       (make-instance 'color
                      :hue hue :saturation saturation :brightness brightness :alpha alpha
@@ -110,9 +117,9 @@
                        ((3 4) 4)
                        ((6 8) 8)
                        (t (error "~a is not a valid hex color." string))))
-               (groups (my-sketch.utils:group-bits (parse-integer string :radix 16 :junk-allowed t)
+               (groups (group-bits (parse-integer string :radix 16 :junk-allowed t)
                                    bits)))
-          (my-sketch.utils:pad-list (mapcar (lambda (x) (/ x (if (= bits 4) 15 255))) groups)
+          (pad-list (mapcar (lambda (x) (/ x (if (= bits 4) 15 255))) groups)
                     0
                     (if (= 4 bits)
                         (length string)
@@ -141,15 +148,15 @@
         (color-alpha color)))
 
 (defun color-vector (color)
-  (apply #'vector (mapcar #'my-sketch.utils:coerce-float (color-rgba color))))
+  (apply #'vector (mapcar #'coerce-float (color-rgba color))))
 
 (defun color-vector-255 (color)
   (apply #'vector (color-rgba-255 color)))
 
 (defun lerp-color (start-color end-color amount &key (mode :hsb))
-  (let ((a (my-sketch.math:clamp-1 amount)))
+  (let ((a (clamp-1 amount)))
     (flet ((norm (field)
-             (my-sketch.math:normalize a 0.0 1.0
+             (normalize a 0.0 1.0
                         :out-low (slot-value start-color field)
                         :out-high (slot-value end-color field))))
       (if (eq mode :hsb)
@@ -160,7 +167,7 @@
   (rgb (random 1.0) (random 1.0) (random 1.0) alpha))
 
 (defun hash-color (n &optional (alpha 1.0))
-  (let* ((grp (my-sketch.utils:group-bits n))
+  (let* ((grp (group-bits n))
          (arr (make-array (length grp)
                           :element-type '(unsigned-byte 8)
                           :initial-contents grp))
@@ -198,9 +205,9 @@
        (color-red color)))
 
 (defun color-filter-hsb (color &key (hue 0.0) (saturation 0.0) (brightness 0.0))
-  (let ((hue (my-sketch.math:clamp-1 (+ hue (color-hue color))))
-        (saturation (my-sketch.math:clamp-1 (+ saturation (color-brightness color))))
-        (brightness (my-sketch.math:clamp-1 (+ brightness (color-brightness color))))
+  (let ((hue (clamp-1 (+ hue (color-hue color))))
+        (saturation (clamp-1 (+ saturation (color-brightness color))))
+        (brightness (clamp-1 (+ brightness (color-brightness color))))
         (alpha (color-alpha color)))
     (destructuring-bind (red green blue) (hsb-to-rgb hue saturation brightness)
       (make-instance 'color

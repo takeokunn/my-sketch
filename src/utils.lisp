@@ -1,5 +1,5 @@
 (defpackage my-sketch.utils
-  (:use :cl :my-sketch.math)
+  (:use :cl)
   (:export :pad-list
            :split-n
            :group
